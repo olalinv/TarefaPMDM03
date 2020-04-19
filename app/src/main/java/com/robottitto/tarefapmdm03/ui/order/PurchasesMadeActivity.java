@@ -41,13 +41,14 @@ public class PurchasesMadeActivity extends AppCompatActivity {
         rvOrders.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         rvOrders.setLayoutManager(layoutManager);
-        mAdapter = new OrderAdapter(orders);
-        rvOrders.setAdapter(mAdapter);
 
         // Initialization
         orderModelService = OrderModelService.get(this);
         try {
             orders = orderModelService.findOrdersByUserIdAndStatus(getUserDetails("UID"), Status.ACCEPTED.getStatus());
+            // Adapter
+            mAdapter = new OrderAdapter(orders);
+            rvOrders.setAdapter(mAdapter);
         } catch (Exception e) {
             e.printStackTrace();
             ActivityUtil.showToast(context, getString(R.string.error) + ": " + e.getMessage());

@@ -1,6 +1,7 @@
 package com.robottitto.tarefapmdm03.ui.order;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.robottitto.tarefapmdm03.R;
@@ -70,20 +72,43 @@ public class SelectAddressActivity extends AppCompatActivity implements Serializ
                     newAddress.setZipCode(etZipCode.getText().toString());
                     order.setAddress(newAddress);
                     order.setUserId(getUserDetails("UID"));
-                    try {
-                        orderModelService.addOrder(order);
-                        Log.d(TAG, orderModelService.getOrders().toString());
-                        ActivityUtil.showToast(context, getString(R.string.order_done));
-                        ActivityUtil.go(context, ProfileActivity.class);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        ActivityUtil.showToast(context, getString(R.string.error) + ": " + e.getMessage());
-                    }
+                    openConfirmDialog(order);
                 } else {
                     ActivityUtil.showToast(context, getString(R.string.error_empty_fields));
                 }
             }
         });
+    }
+
+    private void openConfirmDialog(final Order order) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.confirm_order))
+                .setCancelable(false)
+                .setMessage(order.getQuantity() + " " + order.getProduct())
+                .setPositiveButton(getString(R.string.accept), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        makeOrder(order);
+                    }
+                })
+                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void makeOrder(Order order) {
+        try {
+            orderModelService.addOrder(order);
+            Log.d(TAG, orderModelService.getOrders().toString());
+            ActivityUtil.showToast(context, getString(R.string.order_done));
+            ActivityUtil.go(context, ProfileActivity.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ActivityUtil.showToast(context, getString(R.string.error) + ": " + e.getMessage());
+        }
     }
 
     private int getUserDetails(String key) {

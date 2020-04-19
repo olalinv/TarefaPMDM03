@@ -37,7 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom|center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/btMakeOrder"
@@ -65,7 +66,7 @@
             android:layout_height="wrap_content"
             android:gravity="bottom|center_horizontal"
             android:orientation="vertical"
-            android:visibility="invisible">
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/btSeePendingOrders"
@@ -91,7 +92,8 @@
             android:id="@+id/btLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/log_out" />
+            android:text="@string/log_out"
+            android:gravity="bottom|center_horizontal" />
 
     </LinearLayout>
 

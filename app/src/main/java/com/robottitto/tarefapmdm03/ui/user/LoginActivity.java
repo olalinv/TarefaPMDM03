@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.robottitto.tarefapmdm03.R;
 import com.robottitto.tarefapmdm03.api.core.AppSharedPreferences;
 import com.robottitto.tarefapmdm03.api.user.UserModelService;
-import com.robottitto.tarefapmdm03.api.user.UserUtil;
 import com.robottitto.tarefapmdm03.api.user.enums.Role;
 import com.robottitto.tarefapmdm03.api.user.model.User;
 import com.robottitto.tarefapmdm03.ui.core.ActivityUtil;
@@ -56,10 +55,10 @@ public class LoginActivity extends AppCompatActivity {
                         if (null != user) {
                             if (user.getPassword().equals(password)) {
                                 saveUserDetails(user.getUserId());
-                                if (Role.CLIENTE.getRole() == user.getRole()) {
+                                if (Role.CUSTOMER.getRole() == user.getRole()) {
                                     ActivityUtil.go(context, ProfileActivity.class);
                                 }
-                                if (Role.ADMINISTRADOR.getRole() == user.getRole()) {
+                                if (Role.ADMIN.getRole() == user.getRole()) {
                                     ActivityUtil.go(context, ProfileActivity.class);
                                 }
                             } else {

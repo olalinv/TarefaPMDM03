@@ -25,6 +25,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         public TextView tvProduct;
         public TextView tvCategory;
         public TextView tvQuantity;
+
         public MyViewHolder(View v) {
             super(v);
             tvId = v.findViewById(R.id.tvId);

@@ -1,9 +1,12 @@
 <resources>
     <string name="street">Dirección</string>
-    <string name="accept">Aceptar</string>
+    <string name="action_settings">Acciones</string>
+    <string name="accept">OK</string>
     <string name="app_name">Tarefa PMDM03</string>
+    <string name="cancel">Cancelar</string>
     <string name="category">Categoría</string>
     <string name="city">Cidade</string>
+    <string name="confirm_order">Confirmar pedido</string>
     <string name="create_account">Crear conta</string>
     <string name="dummy_admin">NomeB Apelido1B Apelido2B</string>
     <string name="dummy_client">NomeA Apelido1A Apelido2A</string>
@@ -18,13 +21,16 @@
     <string name="make_order">Facer pedido</string>
     <string name="name">Nome</string>
     <string name="next">Seguinte</string>
+    <string name="order">Pedido</string>
     <string name="order_done">Realizouse o pedido</string>
     <string name="password">Contrasinal</string>
     <string name="product">Producto</string>
     <string name="products">Productos</string>
     <string name="register">Rexistrarse</string>
     <string name="register_instructions">Non dispón de usuario? Cree unha conta</string>
-    <string name="reject">Rexeitar</string>
+    <string name="reject">X</string>
+    <string name="result_order_accepted">Aceptouse o pedido</string>
+    <string name="result_order_rejected">Rechazouse o pedido</string>
     <string name="role">Rol</string>
     <string name="quantity">Cantidade</string>
     <string name="see_accepted_orders">Ver pedidos aceptados</string>
@@ -32,7 +38,16 @@
     <string name="see_rejected_orders">Ver pedidos rexeitados</string>
     <string name="see_purchases_made">Ver compras realizadas</string>
     <string name="surname">Apelidos</string>
-    <string name="user_created">Se creó el usuario</string>
+    <string name="user_created">Creouse o usuario</string>
     <string name="username">Usuario</string>
+    <string name="your_order">O seu pedido</string>
     <string name="zip_code">Código postal</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

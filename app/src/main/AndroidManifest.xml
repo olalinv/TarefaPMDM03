@@ -12,16 +12,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.order.PendingOrdersActivity"></activity>
-        <activity android:name=".ui.order.RejectedOrdersActivity" />
-        <activity android:name=".ui.order.AcceptedOrdersActivity" />
-        <activity android:name=".ui.user.RegisterActivity" />
-        <activity android:name=".ui.order.PurchasesMadeActivity" />
-        <activity android:name=".ui.order.OrdersInProcessActivity" />
-        <activity android:name=".ui.order.SelectAddressActivity" />
-        <activity android:name=".ui.order.MakeOrderActivity" />
+        <activity
+            android:name=".ui.order.PendingOrdersActivity"
+            android:parentActivityName=".ui.user.ProfileActivity" />
+        <activity
+            android:name=".ui.order.RejectedOrdersActivity"
+            android:parentActivityName=".ui.user.ProfileActivity" />
+        <activity
+            android:name=".ui.order.AcceptedOrdersActivity"
+            android:parentActivityName=".ui.user.ProfileActivity" />
+        <activity
+            android:name=".ui.user.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.order.PurchasesMadeActivity"
+            android:parentActivityName=".ui.user.ProfileActivity" />
+        <activity
+            android:name=".ui.order.OrdersInProcessActivity"
+            android:parentActivityName=".ui.user.ProfileActivity" />
+        <activity
+            android:name=".ui.order.SelectAddressActivity"
+            android:parentActivityName=".ui.order.MakeOrderActivity" />
+        <activity
+            android:name=".ui.order.MakeOrderActivity"
+            android:parentActivityName=".ui.user.ProfileActivity" />
         <activity android:name=".ui.user.ProfileActivity" />
-        <activity android:name=".ui.user.LoginActivity">
+        <activity
+            android:name=".ui.user.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

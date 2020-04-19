@@ -2,8 +2,8 @@ package com.robottitto.tarefapmdm03.api.user.enums;
 
 public enum Role {
 
-    CLIENTE(0),
-    ADMINISTRADOR(1);
+    CUSTOMER(0),
+    ADMIN(1);
 
     private final int role;
 

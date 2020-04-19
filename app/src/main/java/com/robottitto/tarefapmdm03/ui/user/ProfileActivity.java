@@ -3,6 +3,8 @@ package com.robottitto.tarefapmdm03.ui.user;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -29,6 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Context context;
     private User user;
     private UserModelService userModelService;
+    private Boolean isAdmin;
 
     private LinearLayout clientLayout;
     private TextView tvName;
@@ -56,6 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
         btSeeOrders = findViewById(R.id.btSeeOrders);
         btSeePurchases = findViewById(R.id.btSeePurchases);
         btLogout = findViewById(R.id.btLogout);
+
         // Admin
         adminLayout = findViewById(R.id.adminLayout);
         btSeePendingOrders = findViewById(R.id.btSeePendingOrders);
@@ -68,18 +72,23 @@ public class ProfileActivity extends AppCompatActivity {
             user = userModelService.findUserById(getUserDetails("UID"));
             if (null != user) {
                 tvName.setText(user.getName().concat(" ").concat(user.getSurname()));
-                if (user.getRole() == Role.ADMINISTRADOR.getRole()) {
-                    clientLayout.setVisibility(View.INVISIBLE);
+                if (user.getRole() == Role.ADMIN.getRole()) {
+                    isAdmin = true;
+                    clientLayout.setVisibility(View.GONE);
                     adminLayout.setVisibility(View.VISIBLE);
+                } else if (user.getRole() == Role.CUSTOMER.getRole()) {
+                    isAdmin = false;
+                    clientLayout.setVisibility(View.VISIBLE);
+                    adminLayout.setVisibility(View.GONE);
                 }
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             ActivityUtil.showToast(context, getString(R.string.error) + ": " + e.getMessage());
         }
 
         // Events
-        //Client
+        // Client
         btMakeOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,6 +140,46 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        int menuType = isAdmin ? R.menu.menu_admin : R.menu.menu_customer;
+        getMenuInflater().inflate(menuType, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+            case R.id.makeOrder:
+                btMakeOrder.performClick();
+                return true;
+            case R.id.seeOrders:
+                btSeeOrders.performClick();
+                return true;
+            case R.id.seePurchases:
+                btSeePurchases.performClick();
+                return true;
+            case R.id.seeOrdersInProcess:
+                btSeePendingOrders.performClick();
+                return true;
+            case R.id.seeAcceptedOrders:
+                btSeeAcceptedOrders.performClick();
+                return true;
+            case R.id.seeRejectedOrders:
+                btSeeRejectedOrders.performClick();
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     private int getUserDetails(String key) {
         SharedPreferences sharedPref = getSharedPreferences(AppSharedPreferences.PREFS_NAME, Context.MODE_PRIVATE);
